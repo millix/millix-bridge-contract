@@ -1,10 +1,10 @@
 module.exports = {
   networks: {
-    development: {
+    /*development: {
       network_id: "*",
       port: 8545,
       host: "127.0.0.1"
-    }
+    }*/
   },
   mocha: {},
   compilers: {
