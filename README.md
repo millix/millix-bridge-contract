@@ -3,6 +3,40 @@
 ## Introduction:
 This is the smart contract for the WrappedMillix ERC20 token. It implements the ERC20, Pausable, and Ownable contracts from OpenZeppelin and the IMillixBridge interface.
 
+## Getting started
+The smart contract is developed using the Truffle Suite. To get started you have to install all the dependencies.
+```
+npm install
+```
+
+Before you begin, ensure that you've read the [official Ethereum documentation](https://ethereum.org/en/what-is-ethereum/) and [Truffle Suite quickstart](https://trufflesuite.com/docs/truffle/quickstart/).
+
+The project has the following structure:
+
+- contracts/: Directory for Solidity contracts
+- migrations/: Directory for scriptable deployment files
+- test/: Directory for test files for testing your application and contracts
+- truffle-config.js: Truffle configuration file
+
+Start the Truffle develop console to deploy and test the smart contract.
+```
+npx truffle develop
+```
+
+In the Truffle develop console, compile the code
+```
+truffle(develop)> compile
+```
+Then migrate the smart contract
+```
+truffle(develop)> migrate
+```
+
+And test the smart contract
+```
+truffle(develop)> test
+```
+
 ## Token Name:
 WrappedMillix
 
