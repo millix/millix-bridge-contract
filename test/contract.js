@@ -23,7 +23,7 @@ contract("WrappedMillix", (accounts) => {
     it("should update burn fees", async () => {
         const wmlx = await WrappedMillix.deployed();
         const fees = 100000;
-        await wmlx.setBurnFees(fees);
+        truffleAssert.eventEmitted(await wmlx.setBurnFees(fees), "BurnFeesUpdated", { burnFees: web3.utils.toBN(fees) });
         const newBurnFees = await wmlx.burnFees();
         assert.equal(newBurnFees, fees, "burn fees should be updated to 100000");
     });
@@ -62,8 +62,7 @@ contract("WrappedMillix", (accounts) => {
         let balance = await wmlx.balanceOf(accounts[1]);
 
         const burnFees = 40404;
-        await wmlx.setBurnFees(burnFees);
-
+        truffleAssert.eventEmitted(await wmlx.setBurnFees(burnFees), "BurnFeesUpdated", { burnFees: web3.utils.toBN(burnFees) });
         const ownerAccountEtherBefore = await web3.eth.getBalance(accounts[0]);
         await wmlx.unwrap(balance, MILLIX_ACCOUNT_ADDRESS, { from: accounts[1], value: burnFees });
         const ownerAccountEtherAfter = await web3.eth.getBalance(accounts[0]);

@@ -19,6 +19,16 @@ interface IMillixBridge {
     event UnwrapMillix(address indexed from, string to, uint256 amount);
 
     /**
+     * @dev Emitted when `burnFees` value is updated
+     */
+    event BurnFeesUpdated(uint256 burnFees);
+
+    /**
+     * @dev Emitted when `addr` address is added to the list of vested addresses
+     */
+    event AddressVestedStateUpdate(address indexed addr, bool vested);
+
+    /**
      * @dev Emitted when `amount` tokens are minted from millix transaction (`txhash`)
      */
     event MintWrappedMillix(string txhash);
@@ -81,6 +91,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
      */
     function setBurnFees(uint256 fees) public onlyOwner {
         _burnFees = fees;
+        emit BurnFeesUpdated(_burnFees);
     }
 
     /**
@@ -107,6 +118,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
      */
     function setVestingState(address addr, bool vested) public onlyOwner {
         _vesting[addr] = vested;
+        emit AddressVestedStateUpdate(addr, vested);
     }
 
     function _beforeTokenTransfer(
