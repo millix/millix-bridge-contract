@@ -29,7 +29,7 @@ interface IMillixBridge {
 /// @custom:security-contact developer@millix.com
 contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
     uint256 public constant MAX_SUPPLY = 9 * 10**15;
-    uint32 private _burnFees = 662780;
+    uint256 private _burnFees = 662780;
     mapping(address => bool) private _vesting;
 
     constructor() ERC20("WrappedMillix", "WMLX") {}
@@ -79,8 +79,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
      * @dev Set the burn fees for unwrapping tokens to the millix network
      * @param {uint32} fees The burn fees
      */
-    function setBurnFees(uint32 fees) public onlyOwner {
-        require(fees >= 0, "burn fees cannot be negative");
+    function setBurnFees(uint256 fees) public onlyOwner {
         _burnFees = fees;
     }
 
@@ -129,7 +128,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
      */
     function unwrap(uint256 amount, string calldata to) public payable {
         require(
-            msg.value >= _burnFees,
+            msg.value == _burnFees,
             "transaction value does not cover the MLX unwrap fees"
         );
         _burn(_msgSender(), amount);
