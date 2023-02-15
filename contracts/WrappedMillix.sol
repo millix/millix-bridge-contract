@@ -58,9 +58,9 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Mint `amount` tokens to `to`
-     * @param {address} to The address to mint tokens to
-     * @param {uint256} amount The amount of tokens to mint
-     * @param {string} txhash The transaction hash in the millix network for the minting operation
+     * @param to The address to mint tokens to
+     * @param amount The amount of tokens to mint
+     * @param txhash The transaction hash in the millix network for the minting operation
      */
     function mint(
         address to,
@@ -77,7 +77,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Set the burn fees for unwrapping tokens to the millix network
-     * @param {uint32} fees The burn fees
+     * @param fees The burn fees
      */
     function setBurnFees(uint256 fees) public onlyOwner {
         _burnFees = fees;
@@ -93,7 +93,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Check if an address is vested
-     * @param {address} addr The address to check
+     * @param addr The address to check
      * @return {bool} True if the address is vested, false otherwise
      */
     function isVested(address addr) public view returns (bool) {
@@ -102,8 +102,8 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Set the vesting state of an address
-     * @param {address} addr The address to set the vesting state for
-     * @param {bool} vested True if the address is vested, false otherwise
+     * @param addr The address to set the vesting state for
+     * @param vested True if the address is vested, false otherwise
      */
     function setVestingState(address addr, bool vested) public onlyOwner {
         _vesting[addr] = vested;
@@ -123,8 +123,8 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Unwrap `amount` tokens to the millix network address `to`
-     * @param {uint256} amount The amount of tokens to unwrap
-     * @param {string} to The millix network address
+     * @param amount The amount of tokens to unwrap
+     * @param to The millix network address
      */
     function unwrap(uint256 amount, string calldata to) public payable {
         require(
