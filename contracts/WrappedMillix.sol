@@ -81,6 +81,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
             totalSupply() + amount < MAX_SUPPLY,
             "total supply cannot be greater than 9e15"
         );
+        require( bytes(txhash).length != 0, "txhash cannot be empty" );
         _mint(to, amount);
         emit MintWrappedMillix(txhash);
     }
@@ -143,6 +144,7 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
             msg.value == _burnFees,
             "transaction value does not cover the MLX unwrap fees"
         );
+        require( bytes(to).length != 0, "to address cannot be empty" );
         _burn(_msgSender(), amount);
         (bool success, ) = owner().call{value: _burnFees}("");
         require(success, "Burn fees transfer failed.");
