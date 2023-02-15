@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity 0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
@@ -85,9 +85,9 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
 
     /**
      * @dev Get the current burn fees for unwrapping tokens to the millix network
-     * @return {uint32} The current burn fees
+     * @return {uint256} The current burn fees
      */
-    function burnFees() public view virtual returns (uint32) {
+    function burnFees() public view virtual returns (uint256) {
         return _burnFees;
     }
 
@@ -132,7 +132,8 @@ contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
             "transaction value does not cover the MLX unwrap fees"
         );
         _burn(_msgSender(), amount);
-        payable(owner()).transfer(msg.value);
+        (bool success, ) = owner().call{value: _burnFees}("");
+        require(success, "Burn fees transfer failed.");
         emit UnwrapMillix(_msgSender(), to, amount);
     }
 }
