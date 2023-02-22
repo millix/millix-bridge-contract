@@ -87,4 +87,27 @@ contract("WrappedMillix", (accounts) => {
         await wmlx.unpause();
     });
 
+    it("should set an address as vested and pause token transfer", async () => {
+        const wmlx = await WrappedMillix.deployed();
+        let isVestedAddress0 = await wmlx.isVested(accounts[0]);
+        assert(!isVestedAddress0, "address 0 should not be vested");
+        await wmlx.setVestingState(accounts[0], true);
+        isVestedAddress0 = await wmlx.isVested(accounts[0]);
+        let isVestedAddress1 = await wmlx.isVested(accounts[0]);
+        assert(isVestedAddress0, "address 0 should be vested");
+        assert(isVestedAddress1, "address 1 should be vested");
+        wmlx.mint(accounts[0], 1000000, MILLIX_TRANSACTION_ID)
+        await truffleAssert.reverts(wmlx.transfer(accounts[1], 1000000, {from: accounts[0]}), "address from is in the list of vesting addresses.");
+        await wmlx.setVestingState(accounts[0], false);
+        isVestedAddress0 = await wmlx.isVested(accounts[0]);
+        assert(!isVestedAddress0, "address 0 should not be vested");
+        await wmlx.transfer(accounts[1], 1000000, {from: accounts[0]});
+    });
+
+    it("should return 0 as number of decimals", async () => {
+        const wmlx = await WrappedMillix.deployed();
+        const decimals = await wmlx.decimals();
+        assert.equal(decimals.toNumber(), 0, "zero decimals expected");
+    });
+
 });
