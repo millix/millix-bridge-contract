@@ -62,9 +62,9 @@ WrappedMillix can be used on the Ethereum network for various use cases such as 
 The security of the WrappedMillix smart contract is of utmost importance. If you have any security concerns, please contact [developer@millix.com](mailto:developer@millix.com). The smart contract has been audited by [Auditor Name TBD].
 
 ## Contract Features:
-- Pausable: The smart contract has a pausable feature, which allows the owner to pause and unpause the contract as needed.
+- Ownable: The smart contract is ownable, meaning that only the owner can perform certain actions such as minting tokens, setting burn fees, and setting the vesting state of addresses. The millix foundation is the owner of the smart contract.
 
-- Ownable: The smart contract is Ownable, meaning that only the owner can perform certain actions such as minting tokens, setting burn fees, and setting the vesting state of addresses.
+- Pausable: The smart contract has a pausable feature, which allows the owner to pause and unpause the contract as needed.
 
 - IMillixBridge: The smart contract implements the IMillixBridge interface, which provides the ability to unwrap Millix tokens and emit events when tokens are unwrapped or minted.
 
