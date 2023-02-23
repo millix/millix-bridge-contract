@@ -4,6 +4,7 @@ pragma solidity 0.8.17;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import './interfaces/IMillixBridge.sol';
 
 /**
  * WrappedMillix is a smart contract for an ERC20 token with additional features, including pause and resume, minting and burning, and vesting restrictions. 
@@ -11,30 +12,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @title WrappedMillix
  * @dev Developer contact: developer@millix.com
  */
-
-interface IMillixBridge {
-    /**
-     * @dev Emitted when `amount` tokens are moved from account (`from`) to millix network address (`to`)
-     */
-    event UnwrapMillix(address indexed from, string to, uint256 amount);
-
-    /**
-     * @dev Emitted when `burnFees` value is updated
-     */
-    event BurnFeesUpdated(uint256 burnFees);
-
-    /**
-     * @dev Emitted when `addr` address is added to the list of vested addresses
-     */
-    event AddressVestedStateUpdate(address indexed addr, bool vested);
-
-    /**
-     * @dev Emitted when `amount` tokens are minted from millix transaction (`txhash`)
-     */
-    event MintWrappedMillix(string txhash);
-
-    function unwrap(uint256 amount, string calldata to) external payable;
-}
 
 /// @custom:security-contact developer@millix.com
 contract WrappedMillix is ERC20, Pausable, Ownable, IMillixBridge {
