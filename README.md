@@ -59,7 +59,7 @@ The total supply of WrappedMillix tokens is capped at 9 * 10^15. The distributio
 WrappedMillix can be used on the Ethereum network for various use cases such as payment for goods and services, governance, and staking.
 
 ## Smart Contract Security:
-The security of the WrappedMillix smart contract is of utmost importance. If you have any security concerns, please contact [developer@millix.com](mailto:developer@millix.com). The smart contract has been audited by [Auditor Name TBD].
+The security of the Wrapped Millix smart contract is of utmost importance. If you have any security concerns, please contact [developer@millix.com](mailto:developer@millix.com). The Wrapped Millix smart contract audit was completed by [Hacken](https://hacken.io/audits/) on March 1, 2023.
 
 ## Contract Features:
 - Ownable: The smart contract is ownable, meaning that only the owner can perform certain actions such as minting tokens, setting burn fees, and setting the vesting state of addresses. The millix foundation is the owner of the smart contract.
